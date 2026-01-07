@@ -1,96 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ═══════════════════════════════════════════════════════════════════════════
+   TAMV MD-X4™ SOVEREIGN DESIGN SYSTEM
+   Estética Cyber-Imperial: Obsidiana + Oro Imperial + Turquesa Isabella
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* ─── COLORES NÚCLEO ─── */
+    --background: 0 0% 1%;           /* Obsidiana Profunda #020202 */
+    --foreground: 45 90% 96%;        /* Blanco Cálido */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 4%;                 /* Superficie elevada */
+    --card-foreground: 45 90% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 45 90% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* ─── PALETA IMPERIAL ─── */
+    --primary: 43 76% 58%;           /* Oro Imperial #D4AF37 */
+    --primary-foreground: 0 0% 2%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 174 62% 51%;        /* Turquesa Isabella #2DD4BF */
+    --secondary-foreground: 0 0% 2%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 43 76% 58%;
+    --accent-foreground: 0 0% 2%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 43 30% 20%;
+    --input: 0 0% 15%;
+    --ring: 43 76% 58%;
 
-    --radius: 0.5rem;
+    --radius: 1.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* ─── TOKENS EXTENDIDOS ─── */
+    --imperial-gold: 43 76% 58%;
+    --imperial-gold-glow: 43 100% 65%;
+    --isabella-cyan: 174 62% 51%;
+    --isabella-cyan-glow: 174 80% 60%;
+    --obsidian: 0 0% 1%;
+    --obsidian-light: 0 0% 8%;
+    --sovereign-white: 45 90% 96%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* ─── GRADIENTES ─── */
+    --gradient-gold: linear-gradient(135deg, hsl(43 76% 58%), hsl(43 100% 70%));
+    --gradient-isabella: linear-gradient(135deg, hsl(174 62% 51%), hsl(174 80% 65%));
+    --gradient-sovereign: linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 1%));
+    --gradient-glass: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(45, 212, 191, 0.05));
+    --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(43 76% 58% / 0.15), transparent 60%);
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* ─── SOMBRAS ─── */
+    --shadow-gold: 0 0 30px hsl(43 76% 58% / 0.3);
+    --shadow-cyan: 0 0 30px hsl(174 62% 51% / 0.3);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 24px 48px rgba(0, 0, 0, 0.7);
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* ─── SIDEBAR ─── */
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 45 90% 96%;
+    --sidebar-primary: 43 76% 58%;
+    --sidebar-primary-foreground: 0 0% 2%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 45 90% 96%;
+    --sidebar-border: 43 30% 15%;
+    --sidebar-ring: 43 76% 58%;
   }
 
+  /* Sin modo claro - TAMV es eternamente obsidiana */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 0 0% 1%;
+    --foreground: 45 90% 96%;
   }
 }
 
@@ -99,7 +88,321 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--obsidian));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.5);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer components {
+  /* ─── TIPOGRAFÍA SOBERANA ─── */
+  .font-sovereign {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* ─── GLASS MORPHISM IMPERIAL ─── */
+  .glass-sovereign {
+    background: linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.08) 0%,
+      rgba(45, 212, 191, 0.04) 50%,
+      rgba(2, 2, 2, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+  }
+
+  .glass-dark {
+    background: rgba(2, 2, 2, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-isabella {
+    background: linear-gradient(
+      135deg,
+      rgba(45, 212, 191, 0.1) 0%,
+      rgba(2, 2, 2, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+  }
+
+  /* ─── BORDES Y GLOWS ─── */
+  .border-glow-gold {
+    box-shadow: 
+      inset 0 0 20px rgba(212, 175, 55, 0.1),
+      0 0 20px rgba(212, 175, 55, 0.2);
+  }
+
+  .border-glow-cyan {
+    box-shadow: 
+      inset 0 0 20px rgba(45, 212, 191, 0.1),
+      0 0 20px rgba(45, 212, 191, 0.2);
+  }
+
+  .text-glow-gold {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
+  }
+
+  /* ─── TARJETAS DE CONTENIDO ─── */
+  .content-card {
+    @apply relative overflow-hidden rounded-3xl;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(2, 2, 2, 0.95) 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .content-card:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(212, 175, 55, 0.1);
+  }
+
+  /* ─── BADGES Y ETIQUETAS ─── */
+  .badge-live {
+    @apply px-3 py-1 text-xs font-bold uppercase tracking-widest rounded-full;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--imperial-gold-glow)));
+    color: hsl(var(--obsidian));
+    animation: pulse-gold 2s infinite;
+  }
+
+  .badge-isabella {
+    @apply px-3 py-1 text-xs font-medium uppercase tracking-widest rounded-full;
+    background: rgba(45, 212, 191, 0.2);
+    color: hsl(var(--isabella-cyan));
+    border: 1px solid rgba(45, 212, 191, 0.3);
+  }
+
+  /* ─── BOTONES SOBERANOS ─── */
+  .btn-sovereign {
+    @apply relative px-8 py-4 font-sovereign font-bold text-sm uppercase tracking-widest rounded-2xl overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--imperial-gold-glow)));
+    color: hsl(var(--obsidian));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-sovereign::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+
+  .btn-sovereign:hover::before {
+    transform: translateX(100%);
+  }
+
+  .btn-sovereign:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+  }
+
+  .btn-ghost-gold {
+    @apply px-6 py-3 font-medium rounded-xl;
+    color: hsl(var(--primary));
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: transparent;
+    transition: all 0.3s;
+  }
+
+  .btn-ghost-gold:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: hsl(var(--primary));
+  }
+
+  /* ─── NAVEGACIÓN ─── */
+  .nav-link {
+    @apply relative px-4 py-2 text-sm font-medium transition-colors;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: hsl(var(--primary));
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--primary));
+    transform: translateX(-50%);
+    transition: width 0.3s;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 80%;
+  }
+
+  /* ─── INPUTS ─── */
+  .input-sovereign {
+    @apply w-full px-6 py-4 rounded-2xl bg-transparent;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: hsl(var(--foreground));
+    transition: all 0.3s;
+  }
+
+  .input-sovereign::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .input-sovereign:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  }
+
+  /* ─── PULSOS Y ANIMACIONES ─── */
+  .pulse-gold {
+    animation: pulse-gold 2s infinite;
+  }
+
+  .pulse-cyan {
+    animation: pulse-cyan 2s infinite;
+  }
+
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--imperial-gold-glow)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-isabella {
+    background: linear-gradient(135deg, hsl(var(--isabella-cyan)), hsl(var(--isabella-cyan-glow)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-sovereign {
+    background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(45, 212, 191, 0.05), transparent 40%),
+                hsl(var(--background));
+  }
+}
+
+/* ─── KEYFRAMES ─── */
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes pulse-cyan {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(45, 212, 191, 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ─── CANVAS 3D ─── */
+.canvas-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.canvas-container canvas {
+  pointer-events: auto;
 }
