@@ -11,6 +11,11 @@ import DreamSpaces from "./pages/DreamSpaces";
 import Marketplace from "./pages/Marketplace";
 import University from "./pages/University";
 import Wallet from "./pages/Wallet";
+import Channels from "./pages/Channels";
+import Streaming from "./pages/Streaming";
+import Lottery from "./pages/Lottery";
+import Pets from "./pages/Pets";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +35,11 @@ const App = () => (
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/university" element={<University />} />
             <Route path="/wallet" element={<Wallet />} />
+            <Route path="/channels" element={<Channels />} />
+            <Route path="/streaming" element={<Streaming />} />
+            <Route path="/lottery" element={<Lottery />} />
+            <Route path="/pets" element={<Pets />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
