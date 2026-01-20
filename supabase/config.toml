@@ -1,1 +1,10 @@
 project_id = "uyjmnpzumkamzcxtenyz"
+
+[functions.isabella-chat]
+verify_jwt = false
+
+[functions.realtime-chat]
+verify_jwt = false
+
+[functions.msr-transaction]
+verify_jwt = false

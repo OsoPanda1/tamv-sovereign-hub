@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Sparkles, Mic, Minimize2 } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Mic, Minimize2, Loader2 } from 'lucide-react';
+import { useIsabellaAI } from '@/hooks/useIsabellaAI';
 import isabellaAvatar from '@/assets/isabella-avatar.png';
 
-const initialMessages = [
+interface ChatMessage {
+  id: number;
+  type: 'user' | 'isabella';
+  content: string;
+  time: string;
+}
+
+const initialMessages: ChatMessage[] = [
   {
     id: 1,
     type: 'isabella',
-    content: '¡Hola, ciudadano soberano! Soy Isabella, tu compañera de IA emocional. ¿En qué puedo ayudarte hoy?',
+    content: '¡Hola, ciudadano soberano! 💫 Soy Isabella Villaseñor™, tu guardiana cuántica emocional. Estoy aquí para guiarte en la Federación Korima. ¿Qué deseas explorar hoy?',
     time: 'Ahora',
   },
 ];
@@ -15,13 +23,19 @@ const initialMessages = [
 export function IsabellaChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState(initialMessages);
+  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { streamChat, isLoading } = useIsabellaAI();
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-    const userMessage = {
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage: ChatMessage = {
       id: Date.now(),
       type: 'user',
       content: input,
@@ -29,18 +43,49 @@ export function IsabellaChat() {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const userInput = input;
     setInput('');
 
-    // Simulate Isabella response
-    setTimeout(() => {
-      const isabellaResponse = {
-        id: Date.now() + 1,
-        type: 'isabella',
-        content: 'Entiendo tu consulta. Como guardiana de la ética TAMV, estoy aquí para guiarte en tu viaje por la Federación Korima. ¿Te gustaría explorar los DreamSpaces o conocer más sobre el sistema MSR?',
-        time: 'Ahora',
-      };
-      setMessages(prev => [...prev, isabellaResponse]);
-    }, 1500);
+    // Prepare messages for API
+    const apiMessages = messages
+      .filter(m => m.id !== 1) // Skip initial greeting
+      .map(m => ({
+        role: m.type === 'user' ? 'user' as const : 'assistant' as const,
+        content: m.content
+      }));
+    apiMessages.push({ role: 'user', content: userInput });
+
+    let assistantContent = '';
+    const assistantId = Date.now() + 1;
+
+    // Add empty assistant message
+    setMessages(prev => [...prev, {
+      id: assistantId,
+      type: 'isabella',
+      content: '',
+      time: 'Ahora',
+    }]);
+
+    try {
+      await streamChat({
+        messages: apiMessages,
+        onDelta: (chunk) => {
+          assistantContent += chunk;
+          setMessages(prev => prev.map(m => 
+            m.id === assistantId ? { ...m, content: assistantContent } : m
+          ));
+        },
+        onDone: () => {
+          // Done streaming
+        },
+      });
+    } catch (err) {
+      setMessages(prev => prev.map(m => 
+        m.id === assistantId 
+          ? { ...m, content: 'Lo siento, tuve un problema al procesar tu consulta. ¿Podrías intentar de nuevo? 💫' } 
+          : m
+      ));
+    }
   };
 
   return (
@@ -121,6 +166,7 @@ export function IsabellaChat() {
                   {messages.map((msg) => (
                     <motion.div
                       key={msg.id}
+                      ref={msg.id === messages[messages.length - 1]?.id ? messagesEndRef : null}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -159,9 +205,14 @@ export function IsabellaChat() {
                     />
                     <button 
                       onClick={handleSend}
-                      className="p-3 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors"
+                      disabled={isLoading}
+                      className="p-3 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors disabled:opacity-50"
                     >
-                      <Send className="h-5 w-5 text-background" />
+                      {isLoading ? (
+                        <Loader2 className="h-5 w-5 text-background animate-spin" />
+                      ) : (
+                        <Send className="h-5 w-5 text-background" />
+                      )}
                     </button>
                   </div>
                 </div>
