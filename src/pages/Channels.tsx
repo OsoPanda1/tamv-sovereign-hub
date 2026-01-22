@@ -32,7 +32,7 @@ export default function Channels() {
   const [activeTab, setActiveTab] = useState<'all' | 'joined' | 'owned'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showCreateDialog, setShowCreateDialog] = useState(false);
-  const [newChannel, setNewChannel] = useState({ name: '', description: '', type: 'public' as const });
+  const [newChannel, setNewChannel] = useState({ name: '', description: '', type: 'public' as 'public' | 'private' });
 
   useEffect(() => {
     fetchChannels();

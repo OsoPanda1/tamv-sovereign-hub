@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Home, 
@@ -11,16 +12,31 @@ import {
   X,
   Search,
   Bell,
-  MessageCircle
+  MessageCircle,
+  Hash,
+  Ticket,
+  Heart,
+  ShoppingBag,
+  Store,
+  User
 } from 'lucide-react';
 import isabellaAvatar from '@/assets/isabella-avatar.png';
 
 const navItems = [
-  { icon: Home, label: 'Nexo', href: '#nexo' },
-  { icon: Compass, label: 'DreamSpaces', href: '#dreamspaces' },
-  { icon: Play, label: 'Streaming', href: '#streaming' },
-  { icon: Wallet, label: 'MSR Wallet', href: '#wallet' },
-  { icon: GraduationCap, label: 'Universidad', href: '#universidad' },
+  { icon: Home, label: 'Nexo', href: '/' },
+  { icon: Sparkles, label: 'Feed', href: '/feed' },
+  { icon: Hash, label: 'Canales', href: '/channels' },
+  { icon: Compass, label: 'DreamSpaces', href: '/dreamspaces' },
+  { icon: Play, label: 'Streaming', href: '/streaming' },
+  { icon: Wallet, label: 'Wallet', href: '/wallet' },
+  { icon: GraduationCap, label: 'Universidad', href: '/university' },
+];
+
+const moreItems = [
+  { icon: Ticket, label: 'Lotería', href: '/lottery' },
+  { icon: Heart, label: 'Mascotas', href: '/pets' },
+  { icon: ShoppingBag, label: 'Marketplace', href: '/marketplace' },
+  { icon: User, label: 'Perfil', href: '/profile' },
 ];
 
 export function Navbar() {
@@ -47,16 +63,37 @@ export function Navbar() {
 
             {/* Nav Links */}
             <div className="flex items-center gap-1">
-              {navItems.map((item) => (
-                <a
+              {navItems.slice(0, 5).map((item) => (
+                <Link
                   key={item.label}
-                  href={item.href}
-                  className="nav-link flex items-center gap-2 rounded-full px-4 py-2 transition-all hover:bg-primary/10"
+                  to={item.href}
+                  className="nav-link flex items-center gap-2 rounded-full px-3 py-2 transition-all hover:bg-primary/10"
                 >
                   <item.icon className="h-4 w-4" />
-                  <span className="text-sm font-medium">{item.label}</span>
-                </a>
+                  <span className="text-xs font-medium">{item.label}</span>
+                </Link>
               ))}
+              {/* More Dropdown */}
+              <div className="relative group">
+                <button className="nav-link flex items-center gap-2 rounded-full px-3 py-2 transition-all hover:bg-primary/10">
+                  <Menu className="h-4 w-4" />
+                  <span className="text-xs font-medium">Más</span>
+                </button>
+                <div className="absolute right-0 top-full mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="glass-sovereign rounded-2xl p-2 min-w-[160px]">
+                    {[...navItems.slice(5), ...moreItems].map((item) => (
+                      <Link
+                        key={item.label}
+                        to={item.href}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 transition-colors"
+                      >
+                        <item.icon className="h-4 w-4 text-primary" />
+                        <span className="text-sm">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right Section */}
@@ -132,17 +169,17 @@ export function Navbar() {
               exit={{ opacity: 0, y: -20 }}
               className="glass-sovereign mx-4 mt-2 rounded-2xl p-4"
             >
-              <div className="grid grid-cols-3 gap-3">
-                {navItems.map((item) => (
-                  <a
+              <div className="grid grid-cols-4 gap-2">
+                {[...navItems, ...moreItems].map((item) => (
+                  <Link
                     key={item.label}
-                    href={item.href}
+                    to={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-primary/10 transition-colors"
+                    className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-primary/10 transition-colors"
                   >
-                    <item.icon className="h-6 w-6 text-primary" />
-                    <span className="text-xs font-medium text-muted-foreground">{item.label}</span>
-                  </a>
+                    <item.icon className="h-5 w-5 text-primary" />
+                    <span className="text-[10px] font-medium text-muted-foreground">{item.label}</span>
+                  </Link>
                 ))}
               </div>
             </motion.div>
@@ -154,15 +191,21 @@ export function Navbar() {
       <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
         <div className="glass-sovereign mx-4 mb-4 rounded-2xl px-2 py-3">
           <div className="flex items-center justify-around">
-            {navItems.slice(0, 5).map((item) => (
-              <a
+            {[
+              { icon: Home, label: 'Inicio', href: '/' },
+              { icon: Sparkles, label: 'Feed', href: '/feed' },
+              { icon: Compass, label: 'Spaces', href: '/dreamspaces' },
+              { icon: Wallet, label: 'Wallet', href: '/wallet' },
+              { icon: User, label: 'Perfil', href: '/profile' },
+            ].map((item) => (
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className="flex flex-col items-center gap-1 p-2 rounded-xl hover:bg-primary/10 transition-colors group"
               >
                 <item.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 <span className="text-[10px] text-muted-foreground group-hover:text-primary transition-colors">{item.label}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
