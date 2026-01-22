@@ -16,6 +16,9 @@ import Streaming from "./pages/Streaming";
 import Lottery from "./pages/Lottery";
 import Pets from "./pages/Pets";
 import Profile from "./pages/Profile";
+import Gallery from "./pages/Gallery";
+import Governance from "./pages/Governance";
+import Achievements from "./pages/Achievements";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +43,9 @@ const App = () => (
             <Route path="/lottery" element={<Lottery />} />
             <Route path="/pets" element={<Pets />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/governance" element={<Governance />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
