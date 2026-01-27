@@ -11,16 +11,18 @@ import {
   Menu, 
   X,
   Search,
-  Bell,
   MessageCircle,
   Hash,
   Ticket,
   Heart,
   ShoppingBag,
-  Store,
-  User
+  User,
+  Image,
+  Vote,
+  Trophy
 } from 'lucide-react';
 import isabellaAvatar from '@/assets/isabella-avatar.png';
+import { NotificationBell } from './NotificationCenter';
 
 const navItems = [
   { icon: Home, label: 'Nexo', href: '/' },
@@ -33,6 +35,9 @@ const navItems = [
 ];
 
 const moreItems = [
+  { icon: Image, label: 'Galería NFT', href: '/gallery' },
+  { icon: Vote, label: 'Gobernanza', href: '/governance' },
+  { icon: Trophy, label: 'Logros', href: '/achievements' },
   { icon: Ticket, label: 'Lotería', href: '/lottery' },
   { icon: Heart, label: 'Mascotas', href: '/pets' },
   { icon: ShoppingBag, label: 'Marketplace', href: '/marketplace' },
@@ -101,10 +106,10 @@ export function Navbar() {
               <button className="p-2 rounded-full hover:bg-primary/10 transition-colors">
                 <Search className="h-5 w-5 text-muted-foreground hover:text-primary" />
               </button>
-              <button className="p-2 rounded-full hover:bg-primary/10 transition-colors relative">
-                <Bell className="h-5 w-5 text-muted-foreground hover:text-primary" />
-                <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-secondary animate-pulse" />
-              </button>
+              
+              {/* Notification Center */}
+              <NotificationBell />
+              
               <button className="p-2 rounded-full hover:bg-primary/10 transition-colors">
                 <MessageCircle className="h-5 w-5 text-muted-foreground hover:text-primary" />
               </button>
