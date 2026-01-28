@@ -937,6 +937,300 @@ export type Database = {
         }
         Relationships: []
       }
+      staking_config: {
+        Row: {
+          apy_boost_low_tvl: number
+          apy_reduction_high_tvl: number
+          default_fenix_share: number
+          default_infra_share: number
+          default_utility_share: number
+          global_max_stake_per_user: number | null
+          id: string
+          lock_180_bonus: number
+          lock_30_bonus: number
+          lock_365_bonus: number
+          lock_90_bonus: number
+          min_compound_amount: number
+          tvl_threshold_high: number
+          tvl_threshold_low: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          apy_boost_low_tvl?: number
+          apy_reduction_high_tvl?: number
+          default_fenix_share?: number
+          default_infra_share?: number
+          default_utility_share?: number
+          global_max_stake_per_user?: number | null
+          id?: string
+          lock_180_bonus?: number
+          lock_30_bonus?: number
+          lock_365_bonus?: number
+          lock_90_bonus?: number
+          min_compound_amount?: number
+          tvl_threshold_high?: number
+          tvl_threshold_low?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          apy_boost_low_tvl?: number
+          apy_reduction_high_tvl?: number
+          default_fenix_share?: number
+          default_infra_share?: number
+          default_utility_share?: number
+          global_max_stake_per_user?: number | null
+          id?: string
+          lock_180_bonus?: number
+          lock_30_bonus?: number
+          lock_365_bonus?: number
+          lock_90_bonus?: number
+          min_compound_amount?: number
+          tvl_threshold_high?: number
+          tvl_threshold_low?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staking_config_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staking_pools: {
+        Row: {
+          auto_compound_enabled: boolean
+          base_apy: number
+          compound_frequency_hours: number
+          created_at: string
+          current_apy: number
+          description: string | null
+          early_unstake_penalty: number
+          fenix_share: number
+          id: string
+          infra_share: number
+          is_active: boolean
+          is_featured: boolean
+          lock_days: number
+          max_apy: number
+          max_stake: number | null
+          metadata: Json | null
+          min_stake: number
+          name: string
+          pool_type: Database["public"]["Enums"]["staking_pool_type"]
+          total_capacity: number | null
+          total_staked: number
+          updated_at: string
+          utility_share: number
+        }
+        Insert: {
+          auto_compound_enabled?: boolean
+          base_apy?: number
+          compound_frequency_hours?: number
+          created_at?: string
+          current_apy?: number
+          description?: string | null
+          early_unstake_penalty?: number
+          fenix_share?: number
+          id?: string
+          infra_share?: number
+          is_active?: boolean
+          is_featured?: boolean
+          lock_days?: number
+          max_apy?: number
+          max_stake?: number | null
+          metadata?: Json | null
+          min_stake?: number
+          name: string
+          pool_type?: Database["public"]["Enums"]["staking_pool_type"]
+          total_capacity?: number | null
+          total_staked?: number
+          updated_at?: string
+          utility_share?: number
+        }
+        Update: {
+          auto_compound_enabled?: boolean
+          base_apy?: number
+          compound_frequency_hours?: number
+          created_at?: string
+          current_apy?: number
+          description?: string | null
+          early_unstake_penalty?: number
+          fenix_share?: number
+          id?: string
+          infra_share?: number
+          is_active?: boolean
+          is_featured?: boolean
+          lock_days?: number
+          max_apy?: number
+          max_stake?: number | null
+          metadata?: Json | null
+          min_stake?: number
+          name?: string
+          pool_type?: Database["public"]["Enums"]["staking_pool_type"]
+          total_capacity?: number | null
+          total_staked?: number
+          updated_at?: string
+          utility_share?: number
+        }
+        Relationships: []
+      }
+      staking_positions: {
+        Row: {
+          auto_compound: boolean
+          compounded_amount: number
+          created_at: string
+          id: string
+          last_claim_at: string | null
+          last_compound_at: string | null
+          lock_until: string | null
+          locked_apy: number
+          metadata: Json | null
+          pending_rewards: number
+          pool_id: string
+          staked_amount: number
+          staked_at: string
+          status: Database["public"]["Enums"]["staking_position_status"]
+          total_earned: number
+          unstaked_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_compound?: boolean
+          compounded_amount?: number
+          created_at?: string
+          id?: string
+          last_claim_at?: string | null
+          last_compound_at?: string | null
+          lock_until?: string | null
+          locked_apy: number
+          metadata?: Json | null
+          pending_rewards?: number
+          pool_id: string
+          staked_amount: number
+          staked_at?: string
+          status?: Database["public"]["Enums"]["staking_position_status"]
+          total_earned?: number
+          unstaked_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_compound?: boolean
+          compounded_amount?: number
+          created_at?: string
+          id?: string
+          last_claim_at?: string | null
+          last_compound_at?: string | null
+          lock_until?: string | null
+          locked_apy?: number
+          metadata?: Json | null
+          pending_rewards?: number
+          pool_id?: string
+          staked_amount?: number
+          staked_at?: string
+          status?: Database["public"]["Enums"]["staking_position_status"]
+          total_earned?: number
+          unstaked_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staking_positions_pool_id_fkey"
+            columns: ["pool_id"]
+            isOneToOne: false
+            referencedRelation: "staking_pools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "staking_positions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staking_rewards: {
+        Row: {
+          apy_at_time: number
+          created_at: string
+          fenix_amount: number
+          gross_amount: number
+          id: string
+          infra_amount: number
+          net_amount: number
+          period_end: string
+          period_start: string
+          pool_id: string
+          position_id: string
+          reward_type: Database["public"]["Enums"]["staking_reward_type"]
+          user_id: string
+          was_compounded: boolean
+        }
+        Insert: {
+          apy_at_time: number
+          created_at?: string
+          fenix_amount: number
+          gross_amount: number
+          id?: string
+          infra_amount: number
+          net_amount: number
+          period_end: string
+          period_start: string
+          pool_id: string
+          position_id: string
+          reward_type?: Database["public"]["Enums"]["staking_reward_type"]
+          user_id: string
+          was_compounded?: boolean
+        }
+        Update: {
+          apy_at_time?: number
+          created_at?: string
+          fenix_amount?: number
+          gross_amount?: number
+          id?: string
+          infra_amount?: number
+          net_amount?: number
+          period_end?: string
+          period_start?: string
+          pool_id?: string
+          position_id?: string
+          reward_type?: Database["public"]["Enums"]["staking_reward_type"]
+          user_id?: string
+          was_compounded?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staking_rewards_pool_id_fkey"
+            columns: ["pool_id"]
+            isOneToOne: false
+            referencedRelation: "staking_pools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "staking_rewards_position_id_fkey"
+            columns: ["position_id"]
+            isOneToOne: false
+            referencedRelation: "staking_positions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "staking_rewards_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       streams: {
         Row: {
           created_at: string | null
@@ -995,6 +1289,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_dynamic_apy: { Args: { p_pool_id: string }; Returns: number }
       execute_msr_distribution: {
         Args: {
           p_amount: number
@@ -1004,6 +1299,19 @@ export type Database = {
           p_transaction_type: Database["public"]["Enums"]["transaction_type"]
         }
         Returns: string
+      }
+      execute_stake: {
+        Args: {
+          p_amount: number
+          p_auto_compound?: boolean
+          p_pool_id: string
+          p_user_id: string
+        }
+        Returns: string
+      }
+      execute_unstake: {
+        Args: { p_force_early?: boolean; p_position_id: string }
+        Returns: number
       }
     }
     Enums: {
@@ -1028,6 +1336,24 @@ export type Database = {
         | "transaction"
         | "alert"
         | "isabella"
+      staking_pool_type:
+        | "flexible"
+        | "locked_30"
+        | "locked_90"
+        | "locked_180"
+        | "locked_365"
+        | "governance"
+      staking_position_status:
+        | "active"
+        | "unstaking"
+        | "completed"
+        | "cancelled"
+      staking_reward_type:
+        | "yield"
+        | "bonus"
+        | "referral"
+        | "governance"
+        | "compound"
       transaction_type:
         | "earning"
         | "tip"
@@ -1185,6 +1511,27 @@ export const Constants = {
         "transaction",
         "alert",
         "isabella",
+      ],
+      staking_pool_type: [
+        "flexible",
+        "locked_30",
+        "locked_90",
+        "locked_180",
+        "locked_365",
+        "governance",
+      ],
+      staking_position_status: [
+        "active",
+        "unstaking",
+        "completed",
+        "cancelled",
+      ],
+      staking_reward_type: [
+        "yield",
+        "bonus",
+        "referral",
+        "governance",
+        "compound",
       ],
       transaction_type: [
         "earning",

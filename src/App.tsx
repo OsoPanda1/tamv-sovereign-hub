@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import Gallery from "./pages/Gallery";
 import Governance from "./pages/Governance";
 import Achievements from "./pages/Achievements";
+import Staking from "./pages/Staking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/governance" element={<Governance />} />
             <Route path="/achievements" element={<Achievements />} />
+            <Route path="/staking" element={<Staking />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

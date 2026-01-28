@@ -19,7 +19,8 @@ import {
   User,
   Image,
   Vote,
-  Trophy
+  Trophy,
+  Coins
 } from 'lucide-react';
 import isabellaAvatar from '@/assets/isabella-avatar.png';
 import { NotificationBell } from './NotificationCenter';
@@ -35,6 +36,7 @@ const navItems = [
 ];
 
 const moreItems = [
+  { icon: Coins, label: 'Staking', href: '/staking' },
   { icon: Image, label: 'Galería NFT', href: '/gallery' },
   { icon: Vote, label: 'Gobernanza', href: '/governance' },
   { icon: Trophy, label: 'Logros', href: '/achievements' },
